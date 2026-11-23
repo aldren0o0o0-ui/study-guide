@@ -2,7 +2,7 @@ import json
 from functools import lru_cache
 from typing import Annotated, Literal
 
-from pydantic import BeforeValidator, Field, model_validator
+from pydantic import BeforeValidator, Field, field_validator, model_validator
 from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
 
 INSECURE_DEFAULT_JWT_SECRET = "dev-only-insecure-jwt-secret-key-change-in-production-32chars"
@@ -136,6 +136,18 @@ class Settings(BaseSettings):
         le=2_000,
         description="Audio kept before detected speech start so the first words are not clipped.",
     )
+
+    @field_validator("DATABASE_URL", mode="before")
+    @classmethod
+    def normalize_database_url(cls, value: object) -> object:
+        if isinstance(value, str):
+            trimmed = value.strip()
+            if trimmed.startswith("postgres://"):
+                return "postgresql+psycopg://" + trimmed[len("postgres://") :]
+            if trimmed.startswith("postgresql://"):
+                return "postgresql+psycopg://" + trimmed[len("postgresql://") :]
+            return trimmed
+        return value
 
     @model_validator(mode="after")
     def validate_production_security(self) -> "Settings":
