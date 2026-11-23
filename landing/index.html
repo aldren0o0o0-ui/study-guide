@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudyGuide — AI Study Companion & Offline Arcade</title>
+  <meta
+    name="description"
+    content="Download the StudyGuide Android app: AI document analysis, practice exams, live voice tutor, task planner, and 7 offline mini-games."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar glass-card">
+      <div class="brand">
+        <div class="brand-badge">SG</div>
+        <div>
+          <div class="brand-name">StudyGuide</div>
+          <div class="brand-sub">AI Learning Companion</div>
+        </div>
+      </div>
+      <div class="status-pill" id="apiStatusPill">
+        <span class="status-dot" id="apiStatusDot"></span>
+        <span id="apiStatusText">Checking server...</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow">Android APK • v1.0.0 • Offline-First</div>
+          <h1>Study smarter with AI, voice practice, and offline breaks.</h1>
+          <p class="hero-desc">
+            Upload PDFs, DOCX, or notes to generate structured analyses, interactive practice
+            quizzes, AI document chat, and real-time voice coaching—plus 7 built-in arcade games
+            that work offline.
+          </p>
+
+          <div class="cta-row">
+            <a
+              id="downloadApkBtn"
+              class="btn-primary"
+              href="https://expo.dev/accounts/aldren07/projects/study-guide/builds/0d8b68b2-bc13-4e1d-8675-1f956983633f"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span class="btn-icon">⬇</span>
+              <span>Install Android App (APK)</span>
+            </a>
+
+            <button id="copyLinkBtn" class="btn-secondary" type="button">
+              Copy Download Link
+            </button>
+          </div>
+
+          <p class="install-note" id="copyFeedback">
+            Supports Android 8.0+ • Auto-syncs when online • Works offline after first login
+          </p>
+        </div>
+
+        <div class="hero-card glass-card">
+          <div class="qr-header">
+            <span class="qr-badge">Scan on Android</span>
+            <span class="version-tag">APK Build</span>
+          </div>
+          <div class="qr-frame">
+            <img
+              id="qrImage"
+              alt="QR code to install StudyGuide Android APK"
+              width="196"
+              height="196"
+            />
+          </div>
+          <p class="qr-caption">
+            Point your phone camera at the QR code or tap <strong>Install Android App</strong>.
+          </p>
+        </div>
+      </section>
+
+      <section class="features-section">
+        <h2 class="section-title">Everything inside StudyGuide</h2>
+        <div class="features-grid">
+          <article class="feature-card glass-card">
+            <div class="feature-icon">✨</div>
+            <h3>In-Depth AI Analysis</h3>
+            <p>
+              Turn lecture PDFs and notes into structured summaries, key concepts, and definitions
+              saved locally for offline reading.
+            </p>
+          </article>
+
+          <article class="feature-card glass-card">
+            <div class="feature-icon">📝</div>
+            <h3>Smart Exam Reviewer</h3>
+            <p>
+              Generate multiple-choice, true/false, and short-answer quizzes—and retake saved
+              quizzes anytime even without internet.
+            </p>
+          </article>
+
+          <article class="feature-card glass-card">
+            <div class="feature-icon">🎙️</div>
+            <h3>Live AI Voice Practice</h3>
+            <p>
+              Real-time spoken Q&amp;A, interview simulation, and oral defense powered by Gemini Live
+              with smooth streaming audio.
+            </p>
+          </article>
+
+          <article class="feature-card glass-card">
+            <div class="feature-icon">💬</div>
+            <h3>AI Document Chat</h3>
+            <p>
+              Ask questions grounded directly in your uploaded materials and revisit all saved
+              conversations offline.
+            </p>
+          </article>
+
+          <article class="feature-card glass-card">
+            <div class="feature-icon">📅</div>
+            <h3>Task &amp; Study Planner</h3>
+            <p>
+              Schedule study sessions and daily tasks synced cleanly with PostgreSQL and offline
+              local storage.
+            </p>
+          </article>
+
+          <article class="feature-card glass-card">
+            <div class="feature-icon">🎮</div>
+            <h3>7 Offline Arcade Games</h3>
+            <p>
+              Take a study break with Blade Rift, Neon Drift Racing, Violet Sudoku, Memory Rift,
+              Astro Breaker, Neon Block Surge, and Math Blitz Runner.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="steps-section glass-card">
+        <h2 class="section-title">How to install on Android</h2>
+        <div class="steps-grid">
+          <div class="step-item">
+            <div class="step-num">1</div>
+            <div>
+              <h4>Download the APK</h4>
+              <p>Tap <strong>Install Android App (APK)</strong> above or scan the QR code on your phone.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">2</div>
+            <div>
+              <h4>Allow Installation</h4>
+              <p>If Android prompts you, tap <strong>Settings → Allow from this source</strong>, then tap <strong>Install</strong>.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">3</div>
+            <div>
+              <h4>Sign In Once</h4>
+              <p>Open <strong>StudyGuide</strong>, sign in once, and your session + saved study data stay ready offline.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>StudyGuide • Built for Mobile &amp; Web</span>
+      <span id="footerYear"></span>
+    </footer>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
