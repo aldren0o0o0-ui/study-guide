@@ -1,0 +1,56 @@
+[project]
+name = "studyguide-backend"
+version = "0.1.0"
+description = "StudyGuide AI-powered document learning backend"
+requires-python = ">=3.11"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+src = ["app", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "N", "SIM", "C4", "RET"]
+ignore = ["B008", "N818"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["app"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+no_implicit_optional = true
+plugins = ["pydantic.mypy"]
+mypy_path = "."
+packages = ["app", "tests"]
+
+[[tool.mypy.overrides]]
+module = [
+    "pgvector.*",
+    "rq.*",
+    "boto3.*",
+    "botocore.*",
+    "filetype.*",
+    "docx.*",
+    "pymupdf",
+]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = [
+    "app.modules.processing.extraction",
+    "tests.unit.test_extraction_and_chunking",
+]
+disallow_untyped_calls = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+pythonpath = ["."]
+addopts = "-ra -q"
