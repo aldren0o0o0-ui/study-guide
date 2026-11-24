@@ -116,7 +116,10 @@ class GeminiEmbeddingProvider:
                     "AI document processing is not configured on the server (missing API key)."
                 ),
             )
-        self._client = genai.Client(api_key=self._api_key)
+        self._client = genai.Client(
+            api_key=self._api_key,
+            http_options=types.HttpOptions(timeout=60_000),
+        )
         return self._client
 
     def embed_documents(self, texts: Sequence[str]) -> list[list[float]]:
