@@ -2,6 +2,7 @@ import logging
 import math
 import time
 from collections.abc import Callable, Sequence
+from concurrent.futures import ThreadPoolExecutor
 from typing import Any, Literal, Protocol
 
 import httpcore
@@ -86,7 +87,7 @@ class GeminiEmbeddingProvider:
         api_key: str | None,
         model_name: str = "gemini-embedding-001",
         dimension: int = 768,
-        batch_size: int = 32,
+        batch_size: int = 100,
         max_retries: int = 3,
         initial_backoff_seconds: float = 0.5,
         sleep_fn: Callable[[float], None] = time.sleep,
@@ -136,14 +137,28 @@ class GeminiEmbeddingProvider:
                 )
             cleaned_texts.append(stripped)
 
-        results: list[list[float]] = []
-        for start in range(0, len(cleaned_texts), self.batch_size):
-            batch = cleaned_texts[start : start + self.batch_size]
-            batch_vectors = self._embed_batch_with_retry(
-                batch,
+        batches = [
+            cleaned_texts[start : start + self.batch_size]
+            for start in range(0, len(cleaned_texts), self.batch_size)
+        ]
+        if len(batches) == 1:
+            return self._embed_batch_with_retry(
+                batches[0],
                 task_type="RETRIEVAL_DOCUMENT",
             )
-            results.extend(batch_vectors)
+
+        results: list[list[float]] = []
+        with ThreadPoolExecutor(max_workers=min(3, len(batches))) as executor:
+            batch_futures = [
+                executor.submit(
+                    self._embed_batch_with_retry,
+                    batch,
+                    task_type="RETRIEVAL_DOCUMENT",
+                )
+                for batch in batches
+            ]
+            for future in batch_futures:
+                results.extend(future.result())
 
         return results
 

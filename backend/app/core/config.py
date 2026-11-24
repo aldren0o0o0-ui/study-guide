@@ -81,7 +81,7 @@ class Settings(BaseSettings):
     GEMINI_API_KEY: str | None = None
     GEMINI_EMBEDDING_MODEL: str = "gemini-embedding-001"
     GEMINI_EMBEDDING_DIMENSION: int = Field(default=768, ge=64, le=3072)
-    GEMINI_EMBEDDING_BATCH_SIZE: int = Field(default=32, ge=1, le=100)
+    GEMINI_EMBEDDING_BATCH_SIZE: int = Field(default=100, ge=1, le=100)
     CHUNK_SIZE_CHARS: int = Field(default=1000, ge=100, le=8000)
     CHUNK_OVERLAP_CHARS: int = Field(default=200, ge=0, le=4000)
     RQ_QUEUE_NAME: str = "document_processing"
